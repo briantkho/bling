@@ -15,6 +15,6 @@ func GetUser(c *gin.Context) {
 		Email:     "johndoe@gmail.com",
 		Password:  "SALT_PW",
 		CreatedAt: time.Time{},
-		TeamID:    uuid.UUID{},
+		LevelID:   1,
 	})
 }
