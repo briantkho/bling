@@ -9,6 +9,7 @@ type User struct {
 	UserID              uuid.UUID `json:"userID"`
 	FirstName           string    `json:"firstName"`
 	LastName            string    `json:"lastName"`
+	Username            string    `json:"username"`
 	Email               string    `json:"email"`
 	Password            string    `json:"password"`
 	CreatedAt           time.Time `json:"createdAt"`

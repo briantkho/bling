@@ -1,27 +1,36 @@
 package server
 
 import (
+	"database/sql"
 	"github.com/briantkho/bling/internal/services/user"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-func NewServer() *gin.Engine {
-	router := gin.Default()
-
-	router.Use(gin.Recovery())
-	setupRoutes(router)
-
-	return router
+type Server struct {
+	db     *sql.DB
+	router *gin.Engine
 }
 
-/*
-Define routes here
-*/
-func setupRoutes(router *gin.Engine) {
-	router.GET("/", func(c *gin.Context) { c.String(http.StatusOK, "we are so live rn") })
-	userRoutes := router.Group("/api/user")
-	{
-		userRoutes.GET("/:id", user.GetUser)
+func NewServer(db *sql.DB) *Server {
+	return &Server{
+		db:     db,
+		router: gin.Default(),
 	}
+}
+
+// SetupRoutes Add Routes Here/*
+func (s *Server) SetupRoutes() {
+	s.router.GET("/", func(c *gin.Context) { c.String(http.StatusOK, "we are so live rn") })
+
+	userRoutes := s.router.Group("/api/user")
+	{
+		userHandler := user.InitUserDependencies(s.db)
+		userRoutes.GET("/:id", userHandler.GetUserByID)
+		userRoutes.POST("", userHandler.CreateUser)
+	}
+}
+
+func (s *Server) Run(addr string) error {
+	return s.router.Run(addr)
 }
