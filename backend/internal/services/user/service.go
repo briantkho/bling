@@ -14,7 +14,7 @@ func NewService(repo *Repository) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) GetUserByID(userID uuid.UUID) (User, error) {
+func (s *Service) GetUserByID(userID uuid.UUID) (*User, error) {
 	return s.repo.GetUserByID(userID)
 }
 
@@ -38,5 +38,10 @@ func (s *Service) CreateUser(firstName string, lastName string, username string,
 		TotalLifetimePoints: 0,
 		LevelID:             1,
 	}
-	return s.repo.CreateUser(user), nil
+	userId, err := s.repo.CreateUser(user)
+	if err != nil {
+		return uuid.Nil, err
+	}
+
+	return userId, nil
 }

@@ -16,7 +16,7 @@ func NewHandler(service *Service) *Handler {
 }
 
 func (h *Handler) GetUserByID(c *gin.Context) {
-	idParam := c.Param("userID")
+	idParam := c.Param("user_id")
 	userID, err := uuid.Parse(idParam)
 
 	if err != nil {

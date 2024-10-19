@@ -1,6 +1,8 @@
 package user
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 func InitUserDependencies(db *sql.DB) *Handler {
 	userRepo := NewRepository(db)

@@ -16,4 +16,6 @@ type User struct {
 	CurrentLevelPoints  int       `json:"currentLevelPoints"`
 	TotalLifetimePoints int       `json:"totalLifetimePoints"`
 	LevelID             int       `json:"levelId"`
+	LevelNumber         int       `json:"levelNumber"`
+	PointsRequired      int       `json:"pointsRequired"`
 }

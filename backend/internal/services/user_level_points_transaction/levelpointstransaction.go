@@ -1,4 +1,4 @@
-package levelpointstransaction
+package user_level_points_transaction
 
 import (
 	"github.com/google/uuid"

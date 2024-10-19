@@ -26,7 +26,7 @@ func (s *Server) SetupRoutes() {
 	userRoutes := s.router.Group("/api/user")
 	{
 		userHandler := user.InitUserDependencies(s.db)
-		userRoutes.GET("/:id", userHandler.GetUserByID)
+		userRoutes.GET("/:user_id", userHandler.GetUserByID)
 		userRoutes.POST("", userHandler.CreateUser)
 	}
 }
